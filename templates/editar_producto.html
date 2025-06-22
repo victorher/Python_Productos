@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Editar Producto{% endblock %}
+{% block content %}
+    <h2>Editar Producto</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>{{ form.nombre.label }}<br>{{ form.nombre() }}</p>
+        <p>{{ form.cantidad.label }}<br>{{ form.cantidad() }}</p>
+        <p>{{ form.medida.label }}<br>{{ form.medida() }}</p>
+        <p>{{ form.comprado.label }} {{ form.comprado() }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <a href="{{ url_for('lista_productos') }}">Volver a la lista</a>
+{% endblock %}

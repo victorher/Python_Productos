@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Agregar Producto{% endblock %}
+{% block content %}
+    <div class="form-producto-container">
+        <h2>Agregar Producto</h2>
+        <form method="POST" class="form-producto">
+            {{ form.hidden_tag() }}
+            <label for="nombre">{{ form.nombre.label }}</label>
+            {{ form.nombre(id="nombre") }}
+            <label for="cantidad">{{ form.cantidad.label }}</label>
+            {{ form.cantidad(id="cantidad") }}
+            <label for="medida">{{ form.medida.label }}</label>
+            {{ form.medida(id="medida") }}
+            <div class="form-check">
+                {{ form.comprado() }}
+                <label for="comprado" class="inline-label">{{ form.comprado.label }}</label>
+            </div>
+            {{ form.submit(class_="btn-accion") }}
+        </form>
+        <a class="btn-agregar" href="{{ url_for('lista_productos') }}">Volver a la lista</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Administrar Usuarios{% endblock %}
+{% block content %}
+    <h2>Administración de Usuarios</h2>
+    <div class="tabla-usuarios-container">
+        <table class="tabla-usuarios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Usuario</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.correo }}</td>
+                    <td>{{ usuario.usuario }}</td>
+                    <td>
+                        <span class="estado-{{ 'activo' if usuario.estado else 'inactivo' }}">
+                            {{ 'Activo' if usuario.estado else 'Inactivo' }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if usuario.id != current_user.id %}
+                        <form method="POST" action="{{ url_for('cambiar_estado_usuario', usuario_id=usuario.id) }}">
+                            <button type="submit" class="btn-estado">
+                                {% if usuario.estado %}Inactivar{% else %}Activar{% endif %}
+                            </button>
+                        </form>
+                        {% else %}
+                            (Tú)
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p><a href="{{ url_for('index') }}">Volver al inicio</a></p>
+{% endblock %}

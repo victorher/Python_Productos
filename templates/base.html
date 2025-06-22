@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}App Compras{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Inicio</a></li>
+            {% if current_user.is_authenticated %}
+                {% if current_user.es_admin %}
+                    <li><a href="{{ url_for('admin_usuarios') }}">Administrar Usuarios</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('lista_productos') }}">Lista de Productos</a></li>
+                <li><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Iniciar sesión</a></li>
+                <li><a href="{{ url_for('registro') }}">Registrarse</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

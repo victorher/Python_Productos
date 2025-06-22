@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+  <div class="login-container">
+      <h2>Iniciar Sesión</h2>
+      <form method="POST">
+          {{ form.hidden_tag() }}
+          <label for="usuario">{{ form.usuario.label }}</label>
+          {{ form.usuario(size=32, id="usuario") }}
+          <label for="clave">{{ form.clave.label }}</label>
+          {{ form.clave(size=32, id="clave") }}
+          {{ form.submit(class_="btn") }}
+      </form>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="messages">
+          {% for message in messages %}
+            <div>{{ message }}</div>
+          {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      <a class="register-link" href="{{ url_for('registro') }}">¿No tienes cuenta? Regístrate aquí</a>
+  </div>
+</body>
+</html>

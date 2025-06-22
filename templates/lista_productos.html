@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Lista de Productos{% endblock %}
+{% block content %}
+    <h2>Lista de Productos a Comprar</h2>
+    <a class="btn-agregar" href="{{ url_for('agregar_producto') }}">+ Agregar producto</a>
+    <div class="tabla-productos-container">
+        <table class="tabla-productos">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Medida</th>
+                    <th>Comprado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.cantidad }}</td>
+                    <td>{{ producto.medida }}</td>
+                    <td>
+                        <span class="estado-{{ 'activo' if producto.comprado else 'inactivo' }}">
+                            {{ 'Sí' if producto.comprado else 'No' }}
+                        </span>
+                    </td>
+                    <td>
+                        <a class="btn-accion" href="{{ url_for('editar_producto', producto_id=producto.id) }}">Editar</a>
+                        <form action="{{ url_for('eliminar_producto', producto_id=producto.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar este producto?');">
+                            <button type="submit" class="btn-accion btn-eliminar">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
