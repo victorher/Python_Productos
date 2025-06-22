@@ -8,7 +8,9 @@
 - Si quieres desplegar la app en un servidor (por ejemplo, PythonAnywhere), consulta la documentación de Flask para producción.
 
 powersell
+
     python -m venv venv
+
     .\venv\Scripts\activate
 
     pip install -r requirements.txt
