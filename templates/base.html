@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}App Compras{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -22,7 +23,6 @@
             {% endif %}
         </ul>
     </nav>
-    <hr>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul>

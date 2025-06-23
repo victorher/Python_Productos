@@ -62,7 +62,7 @@ def registro():
             usuario=form.usuario.data,
             clave=hashed_password,
             estado=True,
-            es_admin=False  # <--- Importante: los usuarios registrados no son admin
+            es_admin=False
         )
         db.session.add(nuevo_usuario)
         db.session.commit()
@@ -100,7 +100,7 @@ def index():
 @app.route('/productos')
 @login_required
 def lista_productos():
-    # Aquí deberías obtener los productos de la base de datos
+    
     productos = Producto.query.all()
     return render_template('lista_productos.html', productos=productos)
 
@@ -148,7 +148,7 @@ def eliminar_producto(producto_id):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-        # Crear usuario admin solo si no existe
+        
         if not Usuario.query.filter_by(usuario='admin').first():
             admin = Usuario(
                 nombre='Administrador',
