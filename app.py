@@ -9,7 +9,7 @@ from models.producto import Producto
 from forms import LoginForm, RegistroForm, ProductoForm
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'j4rd1nes.23'  # Cambia esto por una clave segura
+app.config['SECRET_KEY'] = 'j4rd1nes.23'
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'compras.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
